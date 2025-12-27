@@ -1,0 +1,145 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;\red0\green0\blue0;\red128\green128\blue128;\red255\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\cf1\f0\fs19\lang9 CREATE\cf2  \cf1 DATABASE\cf2  Class_Scheduling\cf3 ;\cf2\par
+\cf1 USE\cf2  Class_Scheduling\cf3 ;\cf2\par
+\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  department\cf1  \cf3 (\cf2\par
+    departmentId \cf1 VARCHAR\cf3 (\cf2 10\cf3 )\cf2  \cf1 PRIMARY\cf2  \cf1 KEY\cf3 ,\cf2\par
+    departmentName \cf1 VARCHAR\cf3 (\cf2 30\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    departmentLocation \cf1 VARCHAR\cf3 (\cf2 7\cf3 )\cf2\par
+\cf3 );\cf2\par
+\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  departmentHead\cf1  \cf3 (\cf2\par
+    departmentHeadId \cf1 VARCHAR\cf3 (\cf2 10\cf3 )\cf2  \cf1 PRIMARY\cf2  \cf1 KEY\cf3 ,\cf2\par
+    departmentHeadPhoneNumber \cf1 VARCHAR\cf3 (\cf2 14\cf3 ),\cf2\par
+    departmentId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentId\cf3 )\cf2  \cf1 REFERENCES\cf2  department\cf3 (\cf2 departmentId\cf3 )\cf2\par
+\cf3 );\cf2\par
+\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  student\cf1  \cf3 (\cf2\par
+    studentId \cf1 VARCHAR\cf3 (\cf2 10\cf3 )\cf2  \cf1 PRIMARY\cf2  \cf1 KEY\cf3 ,\cf2\par
+    semester \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    studentYear \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    departmentId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentId\cf3 )\cf2  \cf1 REFERENCES\cf2  department\cf3 (\cf2 departmentId\cf3 )\cf2\par
+\cf3 );\cf2\par
+\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  instructor\cf1  \cf3 (\cf2\par
+    instructorId \cf1 VARCHAR\cf3 (\cf2 10\cf3 )\cf2  \cf1 PRIMARY\cf2  \cf1 KEY\cf3 ,\cf2\par
+    instructorSpecialization \cf1 VARCHAR\cf3 (\cf2 25\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    instructorPhoneNumber \cf1 VARCHAR\cf3 (\cf2 14\cf3 ),\cf2\par
+    departmentHeadId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    departmentId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentHeadId\cf3 )\cf2  \cf1 REFERENCES\cf2  departmentHead\cf3 (\cf2 departmentHeadId\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentId\cf3 )\cf2  \cf1 REFERENCES\cf2  department\cf3 (\cf2 departmentId\cf3 )\cf2\par
+\cf3 );\cf2\par
+\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  users\cf1  \cf3 (\cf2\par
+    userId \cf1 VARCHAR\cf3 (\cf2 10\cf3 )\cf2  \cf1 PRIMARY\cf2  \cf1 KEY\cf3 ,\cf2\par
+    userFname \cf1 VARCHAR\cf3 (\cf2 15\cf3 ),\cf2\par
+    userLname \cf1 VARCHAR\cf3 (\cf2 15\cf3 ),\cf2\par
+    userPassword \cf1 VARCHAR\cf3 (\cf2 20\cf3 ),\cf2\par
+    userEmail \cf1 VARCHAR\cf3 (\cf2 50\cf3 ),\cf2\par
+    studentId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    instructorId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    departmentHeadId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 studentId\cf3 )\cf2  \cf1 REFERENCES\cf2  student\cf3 (\cf2 studentId\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 instructorId\cf3 )\cf2  \cf1 REFERENCES\cf2  instructor\cf3 (\cf2 instructorId\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentHeadId\cf3 )\cf2  \cf1 REFERENCES\cf2  departmentHead\cf3 (\cf2 departmentHeadId\cf3 )\cf2\par
+\cf3 );\cf2\par
+\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  course\cf1  \cf3 (\cf2\par
+    courseId \cf1 VARCHAR\cf3 (\cf2 10\cf3 )\cf2  \cf1 PRIMARY\cf2  \cf1 KEY\cf3 ,\cf2\par
+    courseName \cf1 VARCHAR\cf3 (\cf2 20\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    courseCreditHours \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    departmentId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    departmentHeadId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentId\cf3 )\cf2  \cf1 REFERENCES\cf2  department\cf3 (\cf2 departmentId\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentHeadId\cf3 )\cf2  \cf1 REFERENCES\cf2  departmentHead\cf3 (\cf2 departmentHeadId\cf3 )\cf2\par
+\cf3 );\cf2\par
+\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  class\cf1  \cf3 (\cf2\par
+    classId \cf1 VARCHAR\cf3 (\cf2 8\cf3 )\cf2  \cf1 PRIMARY\cf2  \cf1 KEY\cf3 ,\cf2\par
+    roomType \cf1 VARCHAR\cf3 (\cf2 20\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    sectionName \cf1 CHAR\cf3 (\cf2 1\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    departmentHeadId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentHeadId\cf3 )\cf2  \cf1 REFERENCES\cf2  departmentHead\cf3 (\cf2 departmentHeadId\cf3 )\cf2\par
+\cf3 );\cf2\par
+\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  schedule\cf1  \cf3 (\cf2\par
+    scheduleId \cf1 VARCHAR\cf3 (\cf2 20\cf3 )\cf2  \cf1 PRIMARY\cf2  \cf1 KEY\cf3 ,\cf2\par
+    scheduleDay \cf1 VARCHAR\cf3 (\cf2 25\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    scheduleTime \cf1 VARCHAR\cf3 (\cf2 15\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    departmentHeadId \cf1 VARCHAR\cf3 (\cf2 10\cf3 ),\cf2\par
+    \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 departmentHeadId\cf3 )\cf2  \cf1 REFERENCES\cf2  departmentHead\cf3 (\cf2 departmentHeadId\cf3 )\cf2\par
+\cf3 );\cf2\par
+\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  department \cf1 VALUES \cf3 (\cf4 'D001'\cf3 ,\cf4 'SE'\cf3 ,\cf4 'B001'\cf3 );\cf2\par
+\cf1 select\cf3 *\cf1 from\cf2  department\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  departmentHead \cf1 VALUES \cf3 (\cf4 'H001'\cf3 ,\cf4 '+25151234567'\cf3 ,\cf4 'D001'\cf3 );\cf2\par
+\cf1 select\cf3 *\cf1 from\cf2  departmentHead\par
+\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  student \cf1 VALUES\cf2\par
+\cf3 (\cf4 'S001'\cf3 ,\cf2 1\cf3 ,\cf2 2\cf3 ,\cf4 'D001'\cf3 ),\cf2\par
+\cf3 (\cf4 'S002'\cf3 ,\cf2 1\cf3 ,\cf2 2\cf3 ,\cf4 'D001'\cf3 ),\cf2\par
+\cf3 (\cf4 'S003'\cf3 ,\cf2 1\cf3 ,\cf2 2\cf3 ,\cf4 'D001'\cf3 ),\cf2\par
+\cf3 (\cf4 'S004'\cf3 ,\cf2 1\cf3 ,\cf2 2\cf3 ,\cf4 'D001'\cf3 ),\cf2\par
+\cf3 (\cf4 'S005'\cf3 ,\cf2 1\cf3 ,\cf2 2\cf3 ,\cf4 'D001'\cf3 );\cf2\par
+\cf1 select\cf2  \cf3 *\cf2  \cf1 from\cf2  student\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  instructor \cf1 VALUES\cf2\par
+\cf3 (\cf4 'I001'\cf3 ,\cf4 'Teacher'\cf3 ,\cf4 '+251945673278'\cf3 ,\cf4 'H001'\cf3 ,\cf4 'D001'\cf3 ),\cf2\par
+\cf3 (\cf4 'I002'\cf3 ,\cf4 'Teacher'\cf3 ,\cf4 '+251989765432'\cf3 ,\cf4 'H001'\cf3 ,\cf4 'D001'\cf3 );\cf2\par
+\cf1 select\cf2  \cf3 *\cf2  \cf1 from\cf2  instructor\par
+\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  users \cf1 VALUES\cf2\par
+\cf3 (\cf4 'S001'\cf3 ,\cf4 'Hikma'\cf3 ,\cf4 'Mustefa'\cf3 ,\cf4 'Uh21@Hi'\cf3 ,\cf4 'fuia@email.com'\cf3 ,\cf4 'S001'\cf3 ,NULL,NULL),\cf2\par
+\cf3 (\cf4 'S002'\cf3 ,\cf4 'Dagmawi'\cf3 ,\cf4 'Lencho'\cf3 ,\cf4 'Da34_lic'\cf3 ,\cf4 'dagi@email.com'\cf3 ,\cf4 'S002'\cf3 ,NULL,NULL),\cf2\par
+\cf3 (\cf4 'S003'\cf3 ,\cf4 'Tsion'\cf3 ,\cf4 'Aklilu'\cf3 ,\cf4 'Ts21#AKL'\cf3 ,\cf4 'tsi@email.com'\cf3 ,\cf4 'S003'\cf3 ,NULL,NULL),\cf2\par
+\cf3 (\cf4 'S004'\cf3 ,\cf4 'Bekalcha'\cf3 ,\cf4 'Nuredin'\cf3 ,\cf4 'Be23@nu1'\cf3 ,\cf4 'beki@email.com'\cf3 ,\cf4 'S004'\cf3 ,NULL,NULL),\cf2\par
+\cf3 (\cf4 'S005'\cf3 ,\cf4 'Kamil'\cf3 ,\cf4 'Ersido'\cf3 ,\cf4 '27!KPer2'\cf3 ,\cf4 'kamil@email.com'\cf3 ,\cf4 'S005'\cf3 ,NULL,NULL),\cf2\par
+\cf3 (\cf4 'I001'\cf3 ,\cf4 'Alemu'\cf3 ,\cf4 'Kasa'\cf3 ,\cf4 '19@alex2'\cf3 ,\cf4 'kg7@email.com'\cf3 ,NULL,\cf4 'I001'\cf3 ,NULL),\cf2\par
+\cf3 (\cf4 'I002'\cf3 ,\cf4 'Solomon'\cf3 ,\cf4 'Adena'\cf3 ,\cf4 'so4$Ad'\cf3 ,\cf4 'soli@email.com'\cf3 ,NULL,\cf4 'I002'\cf3 ,NULL),\cf2\par
+\cf3 (\cf4 'H001'\cf3 ,\cf4 'Belayneh'\cf3 ,\cf4 'Kasahun'\cf3 ,\cf4 '212$De32'\cf3 ,\cf4 'belay@email.com'\cf3 ,NULL,NULL,\cf4 'H001'\cf3 );\cf2\par
+\cf1 select\cf3 *\cf2  \cf1 from\cf2  users\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  course \cf1 VALUES\cf2\par
+\cf3 (\cf4 'Math2011'\cf3 ,\cf4 'DIS Maths'\cf3 ,\cf2 3\cf3 ,\cf4 'D001'\cf3 ,\cf4 'H001'\cf3 ),\cf2\par
+\cf3 (\cf4 'Seng5021'\cf3 ,\cf4 'FSE'\cf3 ,\cf2 4\cf3 ,\cf4 'D001'\cf3 ,\cf4 'H001'\cf3 );\cf2\par
+\cf1 select\cf3 *\cf2  \cf1 from\cf2  course\par
+\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  class \cf1 VALUES\cf2\par
+\cf3 (\cf4 'C001'\cf3 ,\cf4 'Lecture'\cf3 ,\cf4 'A'\cf3 ,\cf4 'H001'\cf3 ),\cf2\par
+\cf3 (\cf4 'C002'\cf3 ,\cf4 'Lecture'\cf3 ,\cf4 'B'\cf3 ,\cf4 'H001'\cf3 );\cf2\par
+\cf1 select\cf2  \cf3 *\cf2  \cf1 from\cf2  class\par
+\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  schedule \cf1 VALUES\cf2\par
+\cf3 (\cf4 'SCH01'\cf3 ,\cf4 'Monday'\cf3 ,\cf4 '2AM-5AM'\cf3 ,\cf4 'H001'\cf3 ),\cf2\par
+\cf3 (\cf4 'SCH02'\cf3 ,\cf4 'Tuesday'\cf3 ,\cf4 '8AM-11AM'\cf3 ,\cf4 'H001'\cf3 );\cf2\par
+\cf1 SELECT\cf2  \cf3 *\cf1 FROM\cf2  student s\par
+\cf3 INNER\cf2  \cf3 JOIN\cf2  department d\par
+\cf1 ON\cf2  s\cf3 .\cf2 departmentId \cf3 =\cf2  d\cf3 .\cf2 departmentId\cf3 ;\cf2\par
+\cf1 SELECT\cf2  \cf3 *\cf1 FROM\cf2  student s\par
+\cf3 LEFT\cf2  \cf3 JOIN\cf2  department d\par
+\cf1 ON\cf2  s\cf3 .\cf2 departmentId \cf3 =\cf2  d\cf3 .\cf2 departmentId\cf3 ;\cf2\par
+\cf1 SELECT\cf2  \cf3 *\cf1 FROM\cf2  student s\par
+\cf3 RIGHT\cf2  \cf3 JOIN\cf2  department d\par
+\cf1 ON\cf2  s\cf3 .\cf2 departmentId \cf3 =\cf2  d\cf3 .\cf2 departmentId\cf3 ;\cf2\par
+\cf1 SELECT\cf3 *\cf2  \cf1 FROM\cf2  student\cf3 ,\cf2 department \cf1 select\cf2  \cf3 *\cf2  \cf1 from\cf2  student s\par
+\cf1 FULL\cf2  \cf3 OUTER\cf2  \cf3 JOIN\cf2  department d \cf1 ON\cf2  s\cf3 .\cf2 departmentId\cf3 =\cf2 d\cf3 .\cf2 departmentId\cf3 ;\cf2\par
+\cf1 SELECT\cf2  \cf3 *\cf2  \cf1 FROM\cf2   users \cf1 WHERE\cf2  userFname \cf3 like\cf4 'H%'\cf3 ;\cf2  \par
+\cf1 SELECT\cf2  userFname\cf3 ,\cf2 userLname\cf3 ,\cf2 userId \cf1 FROM\cf2   users \cf1 WHERE\cf2  userFname \cf3 like\cf4 'B%'\cf3 ;\cf2  \par
+\cf1 SELECT\cf2  userFname\cf3 ,\cf2 userLname\cf3 ,\cf2 userId \cf1 FROM\cf2   users \cf1 WHERE\cf2  userId \cf3 IN\cf1  \cf3 (\cf4 'S001'\cf3 ,\cf4 'S002'\cf3 ,\cf4 'S003'\cf3 ,\cf4 'S004'\cf3 ,\cf4 'S005'\cf3 );\cf2\par
+\cf1 SELECT\cf2  userFname\cf3 ,\cf2 userLname\cf3 ,\cf2 userId \cf1 FROM\cf2   users \cf1 WHERE\cf2  userId \cf3 BETWEEN\cf2  \cf4 'S001'\cf2  \cf3 AND\cf4 'S005'\cf3 ;\cf2\par
+\cf1 SELECT\cf2  userFname\cf3 ,\cf2 userLname\cf3 ,\cf2 userId \cf1 FROM\cf2   users \cf1 WHERE\cf2  userFname \cf3 like\cf4 'B%'\cf2  \cf3 AND\cf2  userId\cf3 =\cf4 'S003'\cf3 ;\cf2  \par
+\cf1 SELECT\cf2  userFname\cf3 ,\cf2 userLname\cf3 ,\cf2 userId \cf1 FROM\cf2   users \cf1 WHERE\cf2  userFname \cf3 like\cf4 'B%'\cf2  \cf3 OR\cf2  userId \cf3 =\cf4 'S003'\cf3 ;\cf2  \par
+\cf1 SELECT\cf2  \cf3 *\cf2  \cf1 FROM\cf2  users  \cf1 order\cf2  \cf1 by\cf2  userFname\cf3 ,\cf2 userLname\cf3 ;\cf2\par
+\cf1 SELECT\cf2  \cf3 *\cf2  \cf1 FROM\cf2  users  \cf1 order\cf2  \cf1 by\cf2  userFname \cf3 ;\cf2\par
+\cf1 SELECT\cf2  \cf3 *\cf2  \cf1 FROM\cf2  users  \cf1 order\cf2  \cf1 by\cf2  userLname \cf3 ;\cf2\par
+\par
+\par
+\par
+\par
+\par
+\cf0\f1\fs22\par
+}
+ 
